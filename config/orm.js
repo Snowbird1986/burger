@@ -77,11 +77,11 @@ var orm = {
             function(err, result) {
                 if (err) {
                     // If an error occurred, send a generic server failure
-                    return res.status(500).end();
+                    return result.status(500).end();
                   }
                   else if (result.changedRows === 0) {
                     // If no rows were changed, then the ID must not exist, so 404
-                    return res.status(404).end();
+                    return result.status(404).end();
                   }
                   cb(result);
                 //   res.redirect("/").status(200).end();

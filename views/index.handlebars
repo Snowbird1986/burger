@@ -6,12 +6,7 @@
 <ul>
   {{#each burger_name}}
     {{#unless devoured}}
-  	<li>
-			<p>
-      {{this.id}}. {{this.burger_name}}
-			<button data-burger_nameid="{{this.id}}" class="devour">Devour!</button>
-			</p>
-  	</li>
+      {{> burgers/burger-block devoured=true}}
     {{/unless}}
   {{/each}}
 </ul>
@@ -19,9 +14,7 @@
 <ul>
   {{#each burger_name}}
     {{#if devoured}}
-  	<li>
-        <p>{{this.burger_name}}</p>
-  	</li>
+      {{> burgers/burger-block devoured=false}}
     {{/if}}
   {{/each}}
 </ul>
@@ -35,10 +28,18 @@
 <script type="text/javascript">
   $(".devour").on("click", function(event) {
     var id = $(this).data("burger_nameid");
+    var newEat = $(this).data("neweat");
+    console.log(newEat)
+
+    var newEatState = {
+      devoured: newEat
+    };
+    console.log(newEatState)
 
     // Send the DELETE request.
     $.ajax("/burger/" + id, {
       type: "PUT",
+      data: newEatState,
     }).then(
       function() {
         console.log("Updated id ", id);
