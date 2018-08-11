@@ -2,23 +2,29 @@
 
 <h3>Keep track of Hamburgers you want to eat or have Eaten</h3>
 
+<h2>Burgers to snarf!!</h2>
 <ul>
   {{#each burger_name}}
+    {{#unless devoured}}
   	<li>
 			<p>
       {{this.id}}. {{this.burger_name}}
 			<button data-burger_nameid="{{this.id}}" class="devour">Devour!</button>
 			</p>
   	</li>
+    {{/unless}}
   {{/each}}
 </ul>
-{{!-- <ul>
+<h2>Burgers snarffed!!</h2>
+<ul>
   {{#each burger_name}}
+    {{#if devoured}}
   	<li>
         <p>{{this.burger_name}}</p>
   	</li>
+    {{/if}}
   {{/each}}
-</ul> --}}
+</ul>
 
 <h2>Add a burger</h2>
 <form id="addBurger" class="button-size">
@@ -62,26 +68,4 @@
       }
     );
   });
-
-  {{!-- $("#updateBurger").on("submit", function(event) {
-    // Make sure to preventDefault on a submit event.
-    event.preventDefault();
-
-    var id = $("[name=id]").val().trim();
-
-    var updatedPlan = {
-      plan: $("#updateplan [name=plan]").val().trim()
-    };
-
-    // Send the PUT request.
-    $.ajax("/burger/" + id, {
-      type: "PUT",
-    }).then(
-      function() {
-        console.log("updated id ", id);
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  }); --}}
 </script>
